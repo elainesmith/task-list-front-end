@@ -3,20 +3,31 @@ import PropTypes from 'prop-types';
 import Task from './Task';
 import './TaskList.css';
 
-const TaskList = ({ tasks }) => {
-  const getTaskListJSX = (tasks) => {
-    return tasks.map((task) => {
-      return (
-        <Task
-          key={task.id}
-          id={task.id}
-          title={task.title}
-          isComplete={task.isComplete}
-        />
-      );
-    });
-  };
-  return <ul className="tasks__list no-bullet">{getTaskListJSX(tasks)}</ul>;
+const TaskList = (props) => {
+  // console.log(props.tasks);
+
+  const taskComponent = props.tasks.map((task) => (
+    <Task
+      key={task.id}
+      id={task.id}
+      title={task.title}
+      isComplete={task.isComplete}
+    />
+  ));
+  // const getTaskListJSX = (props) => {
+  //   return props.tasks.map((task) => {
+  //     return (
+  //       <Task
+  //         key={task.id}
+  //         id={task.id}
+  //         title={task.title}
+  //         isComplete={task.isComplete}
+  //       />
+  //     );
+  //   });
+  // };
+  // return <ul className="tasks__list no-bullet">{getTaskListJSX(props)}</ul>;
+  return <ul className="tasks__list no-bullet">{taskComponent}</ul>;
 };
 
 TaskList.propTypes = {
