@@ -17,19 +17,24 @@ const TASKS = [
 ];
 
 const App = () => {
-  const [complete, setComplete] = useState(TASKS);
+  const [tasks, setTasks] = useState(TASKS);
 
   const updateComplete = (id) => {
-    console.log('inside updateComplete', id);
-    const newComplete = complete.map((task) => {
+    // console.log('inside updateComplete', id);
+    const newTasks = tasks.map((task) => {
       const newTask = {...task};  
       if (newTask.id === id) {
         newTask.isComplete = !newTask.isComplete;
       }
       return newTask;
   });
-    console.log(newComplete);
-    setComplete(newComplete);
+    console.log(newTasks);
+    setTasks(newTasks);
+  };
+
+  const deleteTask = (id) => {
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
   };
 
 
@@ -40,7 +45,11 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList tasks={complete} setCompleteCallback={updateComplete}/>
+          <TaskList 
+            tasks={tasks} 
+            setCompleteCallback={updateComplete}
+            deleteTaskCallback={deleteTask}
+          />
         </div>
       </main>
     </div>

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Task.css';
 
-const Task = ({ id, title, isComplete, setCompleteCallback}) => {
+const Task = ({ id, title, isComplete, setCompleteCallback, deleteTaskCallback}) => {
   // const [complete, setComplete] = useState(isComplete);
   const complete = isComplete;
   const buttonClass = complete ? 'tasks__item__toggle--completed' : '';
@@ -12,7 +12,10 @@ const Task = ({ id, title, isComplete, setCompleteCallback}) => {
   const toggleComplete = () => {
     setCompleteCallback(id);
     // setComplete(!complete);
+  };
 
+  const deleteTask = () => {
+    deleteTaskCallback(id);
   };
 
   return (
@@ -24,7 +27,7 @@ const Task = ({ id, title, isComplete, setCompleteCallback}) => {
       >
         {title}
       </button>
-      <button className="tasks__item__remove button">x</button>
+      <button className="tasks__item__remove button" onClick={() => deleteTask()}>x</button>
     </li>
   );
 };
@@ -33,7 +36,8 @@ Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
-  setCompleteCallback: PropTypes.func.isRequired
+  setCompleteCallback: PropTypes.func.isRequired,
+  deleteTaskCallback: PropTypes.func.isRequired
 };
 
 export default Task;
