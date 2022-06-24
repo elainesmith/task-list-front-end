@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
 import axios from 'axios';
+import NewTaskForm from './components/NewTaskForm';
 
 // const TASKS = [
 //   {
@@ -82,6 +83,20 @@ const App = () => {
       });
   };
 
+  const makeNewTask = (data) => {
+    console.log(data);
+    axios
+      .post('https://task-list-api-c17.herokuapp.com/tasks', data)
+      // eslint-disable-next-line no-unused-vars
+      .then((response) => {
+        getTasks();
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((error) => {
+        console.log('Could not make new task');
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -89,6 +104,7 @@ const App = () => {
       </header>
       <main>
         <div>
+          <NewTaskForm handleSubmission={makeNewTask} />
           <TaskList
             tasks={tasks}
             setCompleteCallback={updateComplete}

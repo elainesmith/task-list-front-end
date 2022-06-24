@@ -1,10 +1,10 @@
-import "./NewTaskForm.css";
-import PropTypes from "prop-types";
-import { useState } from "react";
+import './NewTaskForm.css';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-const defaultTask = {title: '', isComplete: false};
+const defaultTask = { title: '', description: '', isComplete: false };
 
-const TaskForm = (props) => {
+const NewTaskForm = (props) => {
   const [taskData, setTaskData] = useState(defaultTask);
 
   const handleFormInput = (event) => {
@@ -24,27 +24,40 @@ const TaskForm = (props) => {
 
   return (
     <form onSubmit={handleFormSubmission}>
-          <label>Title</label>
-          <input
-            name="title"
-            type="text"
-            value={taskData.title}
-            onChange={handleFormInput}
-          />
-          <label>Is Complete?</label>
-          <input
-            name="isComplete"
-            type="text"
-            value={taskData.isComplete}
-            onChange={handleFormInput}
-          />
-          <input type="submit" />
+      <label>
+        Title
+        <input
+          name="title"
+          type="text"
+          value={taskData.title}
+          onChange={handleFormInput}
+        />
+      </label>
+      <label>
+        Description
+        <input
+          name="description"
+          type="text"
+          value={taskData.description}
+          onChange={handleFormInput}
+        />
+      </label>
+      <label>
+        Is Complete
+        <input
+          name="isComplete"
+          type="text"
+          value={taskData.isComplete}
+          onChange={handleFormInput}
+        />
+      </label>
+      <input type="submit" />
     </form>
   );
 };
 
-TaskForm.propTypes = {
+NewTaskForm.propTypes = {
   handleSubmission: PropTypes.func.isRequired,
 };
 
-export default TaskForm;
+export default NewTaskForm;
